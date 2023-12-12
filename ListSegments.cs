@@ -8,11 +8,22 @@ class ListSegments {
     {
         // パス取得
         string path = getPath();
-        // 指定されたディレクトリ内のファイルとディレクトリを取得
-        IEnumerable<string> segments = Directory.EnumerateFileSystemEntries(path);
-        // ファイルとディレクトリを表示
-        foreach (string segment in segments) {
-            Console.WriteLine(segment);
+        try
+        {
+            if (!Directory.Exists(path))
+            {
+                throw new DirectoryNotFoundException("指定されたパスが見つかりません");
+            }
+            // 指定されたディレクトリ内のファイルとディレクトリを取得
+            IEnumerable<string> segments = Directory.EnumerateFileSystemEntries(path);
+            // ファイルとディレクトリを表示
+            foreach (string segment in segments) {
+                Console.WriteLine(segment);
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
         }
     }
 
