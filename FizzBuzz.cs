@@ -26,7 +26,7 @@ class FizzBuzz
         }
         return num.ToString();
 
-        // C#8.0以上（.NET Standard2.0から）
+        // C#8.0以上
         // string result = num switch
         // {
         //     int n when n % 3 == 0 && n % 5 == 0 => "FizzBuzz",
