@@ -25,8 +25,11 @@ class ListSegments {
             {
                 FileAttributes attributes = File.GetAttributes(entry);
                 string info = getEntryInfo(attributes);
-                Console.Write(info);
-                Console.WriteLine(entry);
+                Console.WriteLine("{0} {1} {2}",
+                    info,
+                    File.GetLastWriteTime(entry),
+                    entry
+                );
             }
         }
         catch (Exception e)
