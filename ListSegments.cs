@@ -33,7 +33,7 @@ class ListSegments {
                     fileSize = fileinfo.Length;
                 }
                 // 表示
-                Console.WriteLine("{0} {1} {2} {3}",
+                Console.WriteLine("{0} {1:yy-mm-dd HH:mm} {2} {3}",
                     info,  // d:direcoty r:readonly h:hiddenfile s:systemfile
                     fileinfo.LastWriteTime,  // 最終更新日時
                     fileSize,  // ファイルサイズ
