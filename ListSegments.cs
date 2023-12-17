@@ -25,10 +25,19 @@ class ListSegments {
             {
                 FileAttributes attributes = File.GetAttributes(entry);
                 string info = getEntryInfo(attributes);
-                Console.WriteLine("{0} {1} {2}",
-                    info,
-                    File.GetLastWriteTime(entry),
-                    entry
+                FileInfo fileinfo = new FileInfo(entry);
+                // ディレクトリの場合はファイルサイズを0、ファイルの場合はサイズ取得
+                long fileSize = 0;
+                if ((attributes & FileAttributes.Directory) == 0)
+                {
+                    fileSize = fileinfo.Length;
+                }
+                // 表示
+                Console.WriteLine("{0} {1} {2} {3}",
+                    info,  // d:direcoty r:readonly h:hiddenfile s:systemfile
+                    fileinfo.LastWriteTime,  // 最終更新日時
+                    fileSize,  // ファイルサイズ
+                    entry  // パス
                 );
             }
         }
