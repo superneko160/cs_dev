@@ -3,8 +3,8 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 
-class ListSegments {
-
+class ListSegments
+{
     /**
      * メイン処理
      */
