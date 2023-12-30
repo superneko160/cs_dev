@@ -1,4 +1,6 @@
-﻿namespace Editor
+﻿using System.Drawing.Printing;
+
+namespace Editor
 {
     internal class Editor : Form
     {
@@ -11,6 +13,7 @@
                 "テキスト文書|*.txt;*.text",
                 "ログファイル|*.log"
             };
+        private const int FORM_PADDING = 7;
 
         /**
          * コンストラクタ
@@ -51,11 +54,13 @@
             textbox = new TextBox();
             textbox.Multiline = true;
             textbox.Width = this.Width;
-            textbox.Height = this.Height - 100;
+            textbox.Height = this.Height;
             textbox.Location = new Point(0, 40);
             // フォームに紐づけ
-            toolStrip.Parent = this;
-            textbox.Parent = this;
+            this.Controls.Add(toolStrip);
+            this.Controls.Add(textbox);
+            // ウィンドウリサイズ時のイベント追加
+            this.Resize += new EventHandler(form_resize_event!);
             // 切り取り、コピー、貼り付けボタンのイベント追加
             for (int i = 0; i < 3; i++)
             {
@@ -71,6 +76,16 @@
             {
                 tsButton[i].Click += new EventHandler(save_dialog_event!);
             }
+        }
+
+        /**
+         * フォームリサイズ時のイベント処理
+         */
+        private void form_resize_event(object sender, EventArgs e)
+        {
+            // エディタの横幅をフォームに合わせて変更
+            textbox.Width = this.Width;
+            textbox.Height += this.Height;
         }
 
         /**
