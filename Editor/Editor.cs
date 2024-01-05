@@ -6,7 +6,7 @@ namespace Editor
     {
         private TextBox textbox;
         private ToolStrip toolStrip;
-        private ToolStripButton[] tsButton = new ToolStripButton[6];
+        private ToolStripButton[] tsButton = new ToolStripButton[7];
         private string fileFilter;
         internal static readonly string[] fileFilterData = new string[]
             {
@@ -37,6 +37,7 @@ namespace Editor
             tsButton[3].Text = "Load";
             tsButton[4].Text = "Save";
             tsButton[5].Text = "Save as";
+            tsButton[6].Text = "Find";
             // ツールチップテキスト
             tsButton[0].ToolTipText = "切り取り";
             tsButton[1].ToolTipText = "コピー";
@@ -44,6 +45,7 @@ namespace Editor
             tsButton[3].ToolTipText = "ファイル読み込み";
             tsButton[4].ToolTipText = "上書き保存";
             tsButton[5].ToolTipText = "新規保存";
+            tsButton[6].ToolTipText = "検索";
             // ツールチップテキストの追加
             toolStrip = new ToolStrip();
             for (int i = 0; i < tsButton.Length; i++)
@@ -72,9 +74,14 @@ namespace Editor
                 tsButton[i].Click += new EventHandler(dialog_event!);
             }
             // 新規保存ボタンのイベント追加
-            for (int i = 5; i < tsButton.Length; i++)
+            for (int i = 5; i < 6; i++)
             {
                 tsButton[i].Click += new EventHandler(save_dialog_event!);
+            }
+            // 検索ボタンのイベント追加
+            for (int i = 6; i < tsButton.Length; i++)
+            {
+                tsButton[i].Click += new EventHandler(find_form_event!);
             }
         }
 
@@ -154,6 +161,14 @@ namespace Editor
                     streamWriter.Write(textbox.Text);
                 }
             }
+        }
+
+        /**
+         * 検索フォームを表示するボタンのイベント処理
+         */
+        public void find_form_event(object sender, EventArgs e)
+        {
+            // 新しいフォームのインスタンス化
         }
     }
 }
