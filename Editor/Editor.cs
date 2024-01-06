@@ -1,10 +1,8 @@
-﻿using System.Drawing.Printing;
-
-namespace Editor
+﻿namespace Editor
 {
     internal class Editor : Form
     {
-        private TextBox textbox;
+        public RichTextBox textbox;
         private ToolStrip toolStrip;
         private ToolStripButton[] tsButton = new ToolStripButton[7];
         private string fileFilter;
@@ -14,6 +12,7 @@ namespace Editor
                 "ログファイル|*.log"
             };
         private const int FORM_PADDING = 7;
+        private FindForm findForm;
 
         /**
          * コンストラクタ
@@ -53,7 +52,7 @@ namespace Editor
                 toolStrip.Items.Add(tsButton[i]);
             }
             // テキストボックス（エディタ部分）
-            textbox = new TextBox();
+            textbox = new RichTextBox();
             textbox.Multiline = true;
             textbox.Width = this.Width;
             textbox.Height = this.Height;
@@ -83,6 +82,8 @@ namespace Editor
             {
                 tsButton[i].Click += new EventHandler(find_form_event!);
             }
+            // 検索ボックスのインスタンス化
+            findForm = new FindForm(textbox);
         }
 
         /**
@@ -168,7 +169,7 @@ namespace Editor
          */
         public void find_form_event(object sender, EventArgs e)
         {
-            // 新しいフォームのインスタンス化
+            findForm.Show();
         }
     }
 }
