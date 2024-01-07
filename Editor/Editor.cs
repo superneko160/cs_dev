@@ -4,15 +4,15 @@
     {
         private RichTextBox textbox;
         private ToolStrip toolStrip;
-        private ToolStripButton[] tsButton = new ToolStripButton[7];
+        private ToolStripButton[] tsButton = new ToolStripButton[8];
         private string fileFilter;
         internal static readonly string[] fileFilterData = new string[]
             {
                 "テキスト文書|*.txt;*.text",
                 "ログファイル|*.log"
             };
-        private const int FORM_PADDING = 7;
         private FindForm findForm;
+        private ReplaceForm replaceForm;
 
         /**
          * コンストラクタ
@@ -37,6 +37,7 @@
             tsButton[4].Text = "Save";
             tsButton[5].Text = "Save as";
             tsButton[6].Text = "Find";
+            tsButton[7].Text = "Replace";
             // ツールチップテキスト
             tsButton[0].ToolTipText = "切り取り";
             tsButton[1].ToolTipText = "コピー";
@@ -45,6 +46,7 @@
             tsButton[4].ToolTipText = "上書き保存";
             tsButton[5].ToolTipText = "新規保存";
             tsButton[6].ToolTipText = "検索";
+            tsButton[7].ToolTipText = "置換";
             // ツールチップテキストの追加
             toolStrip = new ToolStrip();
             for (int i = 0; i < tsButton.Length; i++)
@@ -78,9 +80,14 @@
                 tsButton[i].Click += new EventHandler(save_dialog_event!);
             }
             // 検索ボタンのイベント追加
-            for (int i = 6; i < tsButton.Length; i++)
+            for (int i = 6; i < 7; i++)
             {
                 tsButton[i].Click += new EventHandler(find_form_event!);
+            }
+            // 置換ボタンのイベント追加
+            for (int i = 7; i < tsButton.Length; i++)
+            {
+                tsButton[i].Click += new EventHandler(replace_form_event!);
             }
         }
 
@@ -169,6 +176,15 @@
         {
             findForm = new FindForm(textbox);
             findForm.Show();
+        }
+
+        /**
+         * 置換フォームを表示するボタンのイベント処理
+         */
+        private void replace_form_event(object sender, EventArgs e)
+        {
+            replaceForm = new ReplaceForm(textbox);
+            replaceForm.Show();
         }
     }
 }
