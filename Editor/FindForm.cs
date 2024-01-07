@@ -16,7 +16,7 @@ namespace Editor
             // エディタのテキストボックス
             this.editorTextBox = editorTextBox;
             // フォーム
-            this.Text = "Find Form";
+            this.Text = "検索";
             this.Width = 350;
             this.Height = 200;
             // 検索ボックス
@@ -33,6 +33,7 @@ namespace Editor
             button.Location = new Point(0, textbox.Height);
             textbox.Parent = this;
             button.Parent = this;
+            // イベント追加
             button.Click += new EventHandler(find_event!);
         }
 
@@ -41,8 +42,12 @@ namespace Editor
          */
         private void find_event(object sender, EventArgs e)
         {
+            // エディタの背景色を白に戻す（リセット）
+            editorTextBox.SelectAll();
+            editorTextBox.SelectionBackColor = Color.White;
+
             Regex rx = new Regex(textbox.Text);
-            Match match = null;
+            Match? match = null;
             for (
                 match = rx.Match(editorTextBox.Text);
                 match.Success;
@@ -50,8 +55,12 @@ namespace Editor
             {
                 // マッチした文字列を赤色に変更
                 editorTextBox.Select(match.Index, match.Length);
-                editorTextBox.SelectionColor = Color.Red;
+                editorTextBox.SelectionBackColor = Color.Yellow;
             }
+            // キャレット位置を最後尾に移動して選択を解除
+            editorTextBox.Select(editorTextBox.TextLength, 0);
+            // 検索フォームを閉じる
+            this.Close();
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     internal class Editor : Form
     {
-        public RichTextBox textbox;
+        private RichTextBox textbox;
         private ToolStrip toolStrip;
         private ToolStripButton[] tsButton = new ToolStripButton[7];
         private string fileFilter;
@@ -82,8 +82,6 @@
             {
                 tsButton[i].Click += new EventHandler(find_form_event!);
             }
-            // 検索ボックスのインスタンス化
-            findForm = new FindForm(textbox);
         }
 
         /**
@@ -99,7 +97,7 @@
         /**
          * 基本処理ボタンのイベント処理
          */
-        public void basic_event(object sender, EventArgs e)
+        private void basic_event(object sender, EventArgs e)
         {
             // 切り取り
             if (sender == tsButton[0])
@@ -121,7 +119,7 @@
         /**
          * ファイルダイアログを表示するボタンのイベント処理
          */
-        public void dialog_event(object sender, EventArgs e)
+        private void dialog_event(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = fileFilter;
@@ -148,7 +146,7 @@
         /**
          * 新規保存ダイアログを表示するボタンのイベント処理
          */
-        public void save_dialog_event(object sender, EventArgs e)
+        private void save_dialog_event(object sender, EventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = fileFilter;
@@ -167,8 +165,9 @@
         /**
          * 検索フォームを表示するボタンのイベント処理
          */
-        public void find_form_event(object sender, EventArgs e)
+        private void find_form_event(object sender, EventArgs e)
         {
+            findForm = new FindForm(textbox);
             findForm.Show();
         }
     }
