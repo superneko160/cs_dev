@@ -19,6 +19,9 @@
          */
         public Editor()
         {
+            // フォームがすべてのキーイベントを受け取るようにする
+            KeyPreview = true;
+
             // ファイルダイアログのフィルタ設定
             fileFilter = String.Join("|", fileFilterData);
             // フォームのタイトル、横幅、高さ
@@ -62,8 +65,11 @@
             // フォームに紐づけ
             this.Controls.Add(toolStrip);
             this.Controls.Add(textbox);
+
             // ウィンドウリサイズ時のイベント追加
             this.Resize += new EventHandler(form_resize_event!);
+            // 特定のキー押下時のイベント
+            this.KeyDown += new KeyEventHandler(keydown_event!);
             // 切り取り、コピー、貼り付けボタンのイベント追加
             for (int i = 0; i < 3; i++)
             {
@@ -185,6 +191,20 @@
         {
             replaceForm = new ReplaceForm(textbox);
             replaceForm.Show();
+        }
+
+        /**
+         * 特定のキー押下時のイベント
+         */
+        private void keydown_event(object sender, KeyEventArgs e)
+        {
+            // Escキー押下時、エディタの背景色を白に戻す（検索時の背景色解除）
+            if (e.KeyCode == Keys.Escape)
+            {
+                textbox.SelectAll();  //全選択
+                textbox.SelectionBackColor = Color.White;  // 背景を白に変更
+                textbox.Select(textbox.TextLength, 0);  // キャレット位置を最後尾に移動し全選択を解除
+            }
         }
     }
 }
