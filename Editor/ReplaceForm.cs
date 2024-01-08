@@ -1,4 +1,6 @@
-﻿namespace Editor
+﻿using System.Text.RegularExpressions;
+
+namespace Editor
 {
     class ReplaceForm : Form
     {
@@ -47,6 +49,20 @@
             button.Height = 50;
             button.Location = new Point(0, (labels[0].Height * 2));
             button.Parent = this;
+            // イベント追加
+            button.Click += new EventHandler(replace_event!);
+        }
+
+        /**
+         * 置換ボタンのイベント
+         */
+        private void replace_event(object sender, EventArgs e)
+        {
+            Regex regex = new Regex(textBoxes[0].Text);
+            editorTextBox.Text = regex.Replace(
+                editorTextBox.Text,  // 置換先
+                textBoxes[1].Text  // 置換後文字列
+            );
         }
     }
 }
