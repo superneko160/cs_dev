@@ -3,6 +3,7 @@
 checkDateTime();
 checkStopWatch();
 checkRandom();
+checkLambda();
 
 static void checkDateTime()
 {
@@ -52,4 +53,25 @@ static void checkRandom()
     Console.WriteLine(random.Next(6));
     // -10以上11未満の整数をランダムに生成
     Console.WriteLine(random.Next(-10, 11));
+}
+
+static void checkLambda()
+{
+    List<int> list = new List<int> { 1, 84, 95, 95, 40, 6 };
+
+    // list の要素から偶数を取り出す（FindAllの引数内にラムダ式使用）
+    List<int> findAllList = list.FindAll(num => num % 2 == 0);
+    Console.WriteLine("=== findAllList ===");
+    foreach (int num in findAllList)
+    {
+        Console.WriteLine(num);
+    }
+
+    // list の要素をそれぞれ 3 倍にする（ConvertAllの引数内にラムダ式使用）
+    List<int> convertAllList = list.ConvertAll(num => num * 3);
+    Console.WriteLine("=== convertAllList ===");
+    foreach (int num in convertAllList)
+    {
+        Console.WriteLine(num);
+    }
 }
