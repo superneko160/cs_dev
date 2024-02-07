@@ -1,9 +1,14 @@
 ﻿using System.Diagnostics;
 
+List<int> list = new List<int> { 1, 84, 95, 95, 40, 6 };
+
 checkDateTime();
 checkStopWatch();
 checkRandom();
-checkLambda();
+checkLambda(list);
+checkBasicLinq(list);
+checkDistinctLinq(list);
+checkToArrayLinq(list);
 
 static void checkDateTime()
 {
@@ -55,10 +60,8 @@ static void checkRandom()
     Console.WriteLine(random.Next(-10, 11));
 }
 
-static void checkLambda()
+static void checkLambda(List<int> list)
 {
-    List<int> list = new List<int> { 1, 84, 95, 95, 40, 6 };
-
     // list の要素から偶数を取り出す（FindAllの引数内にラムダ式使用）
     List<int> findAllList = list.FindAll(num => num % 2 == 0);
     Console.WriteLine("=== findAllList ===");
@@ -71,6 +74,54 @@ static void checkLambda()
     List<int> convertAllList = list.ConvertAll(num => num * 3);
     Console.WriteLine("=== convertAllList ===");
     foreach (int num in convertAllList)
+    {
+        Console.WriteLine(num);
+    }
+}
+
+static void checkBasicLinq(List<int> list)
+{
+    // list の最初の要素を取得
+    Console.WriteLine("First: " + list.First());
+    // list の最後の要素を取得
+    Console.WriteLine("Last: " + list.Last());
+    // list の最大値を取得
+    Console.WriteLine("Max: " + list.Max());
+    // list の最小値を取得
+    Console.WriteLine("Min: " + list.Min());
+    // list の平均値を取得
+    Console.WriteLine("Average: " + list.Average());
+    // list の合計値を取得
+    Console.WriteLine("Sum: " + list.Sum());
+    // list の要素値を取得
+    Console.WriteLine("Count: " + list.Count());
+    // list のすべての要素が 84 未満かどうか
+    Console.WriteLine("All: " + list.All(x => x < 84));  // False
+    // list のいずれかの要素が 84 未満かどうか
+    Console.WriteLine("Any: " + list.Any(x => x < 84));  // True
+    // list に値が 40 の要素が含まれてるかどうか
+    Console.WriteLine("Contains: " + list.Contains(40));  // True
+}
+
+static void checkDistinctLinq(List<int> list)
+{
+    // list から重複を除いた要素を取得
+    var distinctList = list.Distinct();
+    Console.WriteLine("=== distinctList ===");
+    //Console.WriteLine(distinctList.GetType().Name);
+    foreach (int num in distinctList)
+    {
+        Console.WriteLine(num);
+    }
+}
+
+static void checkToArrayLinq(List<int> list)
+{
+    // list を配列に変換
+    int[] numbers = list.ToArray();
+    Console.WriteLine("=== array ===");
+    Console.WriteLine(numbers.GetType().Name);
+    foreach (int num in numbers)
     {
         Console.WriteLine(num);
     }
