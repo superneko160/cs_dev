@@ -9,6 +9,7 @@ checkLambda(list);
 checkBasicLinq(list);
 checkDistinctLinq(list);
 checkToArrayLinq(list);
+checkLinqChain(list);
 
 static void checkDateTime()
 {
@@ -122,6 +123,33 @@ static void checkToArrayLinq(List<int> list)
     Console.WriteLine("=== array ===");
     Console.WriteLine(numbers.GetType().Name);
     foreach (int num in numbers)
+    {
+        Console.WriteLine(num);
+    }
+}
+
+// LINQメソッドの戻り値はIEnumerable型なのでメソッドチェーンとして繋げて使える
+static void checkLinqChain(List<int> list)
+{
+    // LINQ メソッドを組み合わせて使う
+    var resultList1 = list
+        .Distinct()         // 重複要素を削除
+        .Skip(2)            // 先頭から指定された数の要素をスキップ
+        .OrderBy(num => num);   // 昇順に並び替え
+    Console.WriteLine("=== resultList1 ===");
+    foreach (int num in resultList1)
+    {
+        Console.WriteLine(num);
+    }
+
+    // LINQ 以外のメソッド（FindAll、ConvertAll）も組み合わせて使う
+    var resultList2 = list
+        .FindAll(num => num % 2 == 0)
+        .OrderBy(num => num)
+        .ToList()  // ConvertAll メソッドを使用するため一旦 List に変換する
+        .ConvertAll(num => num * 3);
+    Console.WriteLine("=== resultList2 ===");
+    foreach (int num in resultList2)
     {
         Console.WriteLine(num);
     }
