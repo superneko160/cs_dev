@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 
 List<int> list = new List<int> { 1, 84, 95, 95, 40, 6 };
+Dictionary<string, int> dict = new Dictionary<string, int>();
 
 checkDateTime();
 checkStopWatch();
@@ -10,6 +11,7 @@ checkBasicLinq(list);
 checkDistinctLinq(list);
 checkToArrayLinq(list);
 checkLinqChain(list);
+checkDict(dict);
 
 static void checkDateTime()
 {
@@ -152,5 +154,22 @@ static void checkLinqChain(List<int> list)
     foreach (int num in resultList2)
     {
         Console.WriteLine(num);
+    }
+}
+
+static void checkDict(Dictionary<string, int> dict)
+{
+    dict.Add("Alice", 24);  // 要素追加
+    dict.Add("Bob", 31);    // 要素追加
+    Console.WriteLine("=== Dictionary ===");
+    // キーの存在チェック
+    if (dict.ContainsKey("Bob"))
+    {
+        Console.WriteLine("Bobの年齢は " + dict["Bob"] + " 歳");
+    }
+    foreach(KeyValuePair<string, int> val in dict)
+    {
+        Console.WriteLine(val);
+        Console.WriteLine($"{val.Key} : {val.Value}");
     }
 }
