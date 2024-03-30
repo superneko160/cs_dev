@@ -8,7 +8,8 @@
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
             '+', '-', '*', '/', '%', '?', '&', '_'
         ];
-        Random rand = new Random();
+        // Guid.NewGuid().GetHashCode() 生成される乱数の順序が毎回異なるように設定
+        Random rand = new Random(Guid.NewGuid().GetHashCode());
         rand.Shuffle(chars);
 
         string password = GeneratePassword(chars, 7);
