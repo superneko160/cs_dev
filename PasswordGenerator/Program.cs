@@ -12,7 +12,7 @@
         Random rand = new Random(Guid.NewGuid().GetHashCode());
         rand.Shuffle(chars);
 
-        string password = GeneratePassword(chars, 7);
+        string password = GeneratePassword(chars, 7, rand);
         Console.WriteLine(password);
     }
 
@@ -21,14 +21,17 @@
     /// </summary>
     /// <param name="chars">使用可能な文字の配列</param>
     /// <param name="passwordLength">生成するパスワードの長さ</param>
+    /// <param name="rand">Randomオブジェクト</param>
     /// <returns>ランダムに生成されたパスワード文字列</returns>
-    static string GeneratePassword(char[] chars, int passwordLength)
+    static string GeneratePassword(char[] chars, int passwordLength, Random rand)
     {
-        string password = "";
+        char[] password = new char[passwordLength];
+
         for (int i = 0; i < passwordLength; i++)
         {
-            password += chars[i];
+            password[i] = chars[rand.Next(chars.Length)];
         }
-        return password;
+
+        return new string(password);
     }
 }
