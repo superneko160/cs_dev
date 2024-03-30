@@ -8,12 +8,23 @@
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
             '+', '-', '*', '/', '%', '?', '&', '_'
         ];
+
         // Guid.NewGuid().GetHashCode() 生成される乱数の順序が毎回異なるように設定
         Random rand = new Random(Guid.NewGuid().GetHashCode());
         rand.Shuffle(chars);
 
-        string password = GeneratePassword(chars, 7, rand);
-        Console.WriteLine(password);
+        // ユーザがパスワードの長さを入力
+        Console.Write("Enter the desired password length: ");
+        int passwordLength;
+        if (int.TryParse(Console.ReadLine(), out passwordLength) && passwordLength > 0)
+        {
+            string password = GeneratePassword(chars, passwordLength, rand);
+            Console.WriteLine($"Password: {password}");
+        }
+        else
+        {
+            Console.WriteLine("Invalid password length. Please enter a positive integer.");
+        }
     }
 
     /// <summary>
