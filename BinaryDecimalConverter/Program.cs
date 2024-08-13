@@ -4,7 +4,7 @@ Console.WriteLine("数値を入力してください：");
 
 // 入力を受け取る（未入力だった場合は空文字列を用意）
 string input = Console.ReadLine() ?? string.Empty;
-ConvertNumber(input);
+Console.WriteLine(ConvertNumber(input));
 
 // テスト用の入力配列
 //string[] inputs = {
@@ -13,30 +13,33 @@ ConvertNumber(input);
 
 //foreach (var input in inputs)
 //{
-//    ConvertNumber(input);
+//    Console.WriteLine(ConvertNumber(input));
 //    Console.WriteLine();  // 結果の間に空行を挿入
 //}
 
 /// <summary>
-/// 入力された文字列を2進数または10進数として解釈し、適切に変換
+/// 入力された文字列を2進数または10進数として解釈し、結果を返す
 /// </summary>
-/// <param name="input">変換する数値の文字</param>
-static void ConvertNumber(string input)
+/// <param name="input">変換する数値（文字列）</param>
+/// <returns>変換結果（文字列）</returns>
+static string ConvertNumber(string input)
 {
+    if (string.IsNullOrEmpty(input))
+    {
+        return "入力が空です。";
+    }
+
     if (IsBinary(input))
     {
-        int decimalValue = ConvertBinaryToDecimal(input);
-        Console.WriteLine($"2進数 {input} の10進数表現は {decimalValue} です。");
+        return $"2進数 {input} の10進数表現は {ConvertBinaryToDecimal(input)} です。";
     }
-    else if (int.TryParse(input, out int decimalValue))
+
+    if (int.TryParse(input, out int decimalValue))
     {
-        string binaryValue = ConvertDecimalToBinary(decimalValue);
-        Console.WriteLine($"10進数 {input} の2進数表現は {binaryValue} です。");
+        return $"10進数 {input} の2進数表現は {ConvertDecimalToBinary(decimalValue)} です。";
     }
-    else
-    {
-        Console.WriteLine("無効な入力です。2進数または10進数を入力してください。");
-    }
+
+    return $"'{input}' は無効な入力です。2進数または10進数を入力してください。";
 }
 
 /// <summary>
