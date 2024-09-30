@@ -8,9 +8,9 @@ namespace Editor
         private Button button;
         private RichTextBox editorTextBox;
 
-        /**
-         * コンストラクタ
-         */
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public FindForm(RichTextBox editorTextBox)
         {
             // エディタのテキストボックス
@@ -37,9 +37,11 @@ namespace Editor
             button.Click += new EventHandler(find_event!);
         }
 
-        /**
-         * 検索ボタンのイベント
-         */
+        /// <summary>
+        /// 検索ボタンのイベント
+        /// </summary>
+        /// <param name="sender">イベント発生源</param>
+        /// <param name="e">イベント引数</param>
         private void find_event(object sender, EventArgs e)
         {
             // エディタの背景色を白に戻す（リセット）

@@ -14,9 +14,9 @@
         private FindForm findForm;
         private ReplaceForm replaceForm;
 
-        /**
-         * コンストラクタ
-         */
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public Editor()
         {
             // フォームがすべてのキーイベントを受け取るようにする
@@ -97,9 +97,11 @@
             }
         }
 
-        /**
-         * フォームリサイズ時のイベント処理
-         */
+        /// <summary>
+        /// フォームリサイズ時のイベント処理
+        /// </summary>
+        /// <param name="sender">イベント発生源</param>
+        /// <param name="e">イベント引数</param>
         private void form_resize_event(object sender, EventArgs e)
         {
             // エディタの横幅をフォームに合わせて変更
@@ -107,9 +109,11 @@
             textbox.Height += this.Height;
         }
 
-        /**
-         * 基本処理ボタンのイベント処理
-         */
+        /// <summary>
+        /// 基本処理ボタンのイベント処理
+        /// </summary>
+        /// <param name="sender">イベント発生源</param>
+        /// <param name="e">イベント引数</param>
         private void basic_event(object sender, EventArgs e)
         {
             // 切り取り
@@ -129,9 +133,11 @@
             }
         }
 
-        /**
-         * ファイルダイアログを表示するボタンのイベント処理
-         */
+        /// <summary>
+        /// ファイルダイアログを表示するボタンのイベント処理
+        /// </summary>
+        /// <param name="sender">イベント発生源</param>
+        /// <param name="e">イベント引数</param>
         private void dialog_event(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
@@ -156,9 +162,11 @@
             }
         }
 
-        /**
-         * 新規保存ダイアログを表示するボタンのイベント処理
-         */
+        /// <summary>
+        /// 新規保存ダイアログを表示するボタンのイベント処理
+        /// </summary>
+        /// <param name="sender">イベント発生源</param>
+        /// <param name="e">イベント引数</param>
         private void save_dialog_event(object sender, EventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
@@ -175,27 +183,33 @@
             }
         }
 
-        /**
-         * 検索フォームを表示するボタンのイベント処理
-         */
+        /// <summary>
+        /// 検索フォームを表示するボタンのイベント処理
+        /// </summary>
+        /// <param name="sender">イベント発生源</param>
+        /// <param name="e">イベント引数</param>
         private void find_form_event(object sender, EventArgs e)
         {
             findForm = new FindForm(textbox);
             findForm.Show();
         }
 
-        /**
-         * 置換フォームを表示するボタンのイベント処理
-         */
+        /// <summary>
+        /// 置換フォームを表示するボタンのイベント処理
+        /// </summary>
+        /// <param name="sender">イベントの発生源</param>
+        /// <param name="e">イベント引数</param>
         private void replace_form_event(object sender, EventArgs e)
         {
             replaceForm = new ReplaceForm(textbox);
             replaceForm.Show();
         }
 
-        /**
-         * 特定のキー押下時のイベント
-         */
+        /// <summary>
+        /// 特定のキー押下時のイベント
+        /// </summary>
+        /// <param name="sender">イベントの発生源</param>
+        /// <param name="e">キーイベント引数</param>
         private void keydown_event(object sender, KeyEventArgs e)
         {
             // Escキー押下時、エディタの背景色を白に戻す（検索時の背景色解除）

@@ -9,9 +9,9 @@ namespace Editor
         private Button button;
         private RichTextBox editorTextBox;
 
-        /**
-         * コンストラクタ
-         */
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public ReplaceForm(RichTextBox editorTextBox)
         {
             // エディタのテキストボックス
@@ -53,9 +53,11 @@ namespace Editor
             button.Click += new EventHandler(replace_event!);
         }
 
-        /**
-         * 置換ボタンのイベント
-         */
+        /// <summary>
+        /// 置換ボタンのイベント
+        /// </summary>
+        /// <param name="sender">イベント発生源</param>
+        /// <param name="e">イベント引数</param>
         private void replace_event(object sender, EventArgs e)
         {
             Regex regex = new Regex(textBoxes[0].Text);
